@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { checkSessionExists } from '../middlewares/check-session-id-exists'
 
 export async function transactionsRoutes(app: FastifyInstance) {
+  // Create transaction and session id
   app.post('/', async (request, reply) => {
     const createTransactionBodySchema = z.object({
       title: z.string(),
@@ -37,6 +38,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
     return reply.status(201).send()
   })
 
+  // List transactions
   app.get(
     '/',
     {
@@ -53,6 +55,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
     },
   )
 
+  // List transaction id
   app.get(
     '/:id',
     {
@@ -78,6 +81,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
     },
   )
 
+  // List transactions summary
   app.get(
     '/summary',
     {
